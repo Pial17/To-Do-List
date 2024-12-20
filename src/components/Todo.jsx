@@ -4,7 +4,8 @@ import TodoList from './TodoList';
 
 const Todo = () => {
     const inputRef = useRef();
-    const [todoList, setTodoList] = useState([]);
+    const [todoList, setTodoList] = useState(localStorage.getItem("todoKey")?
+    JSON.parse(localStorage.getItem("todoKey")):[]);
     const add = ()=>{
         const inputText = inputRef.current.value.trim();
         if(inputText===''){
@@ -38,7 +39,7 @@ const Todo = () => {
         })
     }
     useEffect(()=>{
-        console.log(toggle);
+        localStorage.setItem("todoKey",JSON.stringify(todoList));
     },[toggle]);
     return (
         <div className='bg-white w-[400px] place-self-center max-w-md flex flex-col p-7
